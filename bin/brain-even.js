@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import readlineSync from 'readline-sync';
 import greetUser from '../src/cli.js';
+import { getRandomNumber, isEven } from '../src/index.js';
 
 console.log('Welcome to the Brain Games!');
 
@@ -13,23 +14,23 @@ const questionUser = () => {
   while (correctAnswerCount < 3) {
     const min = 1;
     const max = 100;
-    const randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+    const randomInt = getRandomNumber(min, max);
 
     const userAnswer = readlineSync.question(`Question: ${randomInt} `);
     console.log(`Your answer: ${userAnswer}`);
 
-    if ((randomInt % 2 === 0 && userAnswer === 'yes') || (randomInt % 2 !== 0 && userAnswer === 'no')) {
+    /* if ((isEven(randomInt) && userAnswer === 'yes') || (!isEven(randomInt) && userAnswer === 'no')) {
       console.log('Correct!');
       correctAnswerCount += 1;
     } else {
-      console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${randomInt % 2 === 0 ? 'yes' : 'no'}'. Let's try again, ${userName}!`);
+      console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${isEven(randomInt) ? 'yes' : 'no'}'. Let's try again, ${userName}!`);
       break;
     }
   }
 
   if (correctAnswerCount === 3) {
     console.log(`Congratulations, ${userName}!`);
-  }
-};
+  }*/
+}; 
 
 questionUser(userName);
